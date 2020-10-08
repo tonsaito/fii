@@ -21,9 +21,17 @@ docker run --name fii-service -p 5000:5000 fii-service
 
 ### Como testar?
 
-#### PUT http://localhost:5000/api/v1/fiis/MFII11
+#### GET http://localhost:5000/api/v1/fiis/MFII11
 
-**Body**
+**Respostas**
+
+```
+[200] Tudo certo. É esperado uma resposta como o do Body abaixo
+[500] Não foi possível recuperar os dados da página
+[503] Não foi possível requisitar a página ou o FII informado não existe
+```
+
+**Body de resposta**
 ```
 [
 	{
@@ -107,12 +115,4 @@ docker run --name fii-service -p 5000:5000 fii-service
 		"dividend":"R$ 1,00"
 	}
 ]
-```
-
-**Respostas**
-
-```
-[200] Tudo certo. É esperado uma resposta como o do Body acima
-[500] Não foi possível recuperar os dados da página
-[503] Não foi possível requisitar a página ou o FII informado não existe
 ```
