@@ -1,10 +1,8 @@
-FROM node:6.5
-MAINTAINER Henrique Lopes
+FROM node:latest
 
-RUN mkdir /api
-WORKDIR /api
-
-ADD . /api/
-
-# Installing project dependencies.
+WORKDIR /app
+COPY package.json /app
 RUN npm install
+COPY . /app
+EXPOSE 5000
+CMD ["npm", "start"]
