@@ -19,7 +19,7 @@ exports.scrapFii = function(request, response){
                   code: codigo,
                   baseDate: $("td", tr).eq(0).text(),
                   payDate: $("td", tr).eq(1).text(),
-                  valueOnPayDate: $("td", tr).eq(2).text(),
+                  valueOnBaseDate: $("td", tr).eq(2).text(),
                   diy: $("td", tr).eq(3).text(),
                   dividend: $("td", tr).eq(4).text(),
               }
