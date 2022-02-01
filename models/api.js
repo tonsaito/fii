@@ -17,11 +17,11 @@ exports.scrapFii = function(request, response){
               var tr = $('tr','table').eq(i);
               var data = {
                   code: codigo,
-                  baseDate: $("td", tr).eq(0).text(),
-                  payDate: $("td", tr).eq(1).text(),
-                  valueOnBaseDate: $("td", tr).eq(2).text(),
-                  diy: $("td", tr).eq(3).text(),
-                  dividend: $("td", tr).eq(4).text(),
+                  baseDate: formatDate($("td", tr).eq(0).text()),
+                  payDate: formatDate($("td", tr).eq(1).text()),
+                  valueOnBaseDate: formatMoney($("td", tr).eq(2).text()),
+                  diy: formatPercentage($("td", tr).eq(3).text()),
+                  dividend: formatMoney($("td", tr).eq(4).text()),
               }
               responseData[i-1] = data;
           }
@@ -32,4 +32,21 @@ exports.scrapFii = function(request, response){
               return response.status(200).json(responseData);
           }
     });
+}
+
+function formatDate(date){
+    var arrayOfStrings = date.split("/");
+    var year = "20"+arrayOfStrings[2];
+    return year+"-"+arrayOfStrings[1]+"-"+arrayOfStrings[0];
+}
+
+function formatMoney(money){
+    money = money.replace("R$","");
+    money = money.replace(" ","");
+    return parseFloat(money.replace(",","."),2);
+}
+
+function formatPercentage(percentage){
+    percentage = percentage.replace(",",".");
+    return parseFloat(percentage.replace("%",""));
 }
